@@ -15,40 +15,38 @@
 - has_many :Items
 - has_many :Shippings
 ## Items
-|Column           |Type      |Option                       |
-|-----------------|----------|-----------------------------|
-|name             |string    |null,false                   |
-|info             |text      |null,false                   |
-|category         |integer   |null,false                   |
-|status           |integer   |null,false                   |
-|fee_status       |integer   |null,false                   |
-|prefecture       |integer   |null,false                   |
-|schedule_delivery|integer   |null,false                   |
-|price            |integer   |null,false                   |
-|tax              |integer   |null,false                   |
-|profit           |integer   |null,false                   |
-|user_id          |references|null,false, foreign_key: true|
+|Column              |Type      |Option                       |
+|--------------------|----------|-----------------------------|
+|name                |string    |null,false                   |
+|info                |text      |null,false                   |
+|category_id         |integer   |null,false                   |
+|status_id           |integer   |null,false                   |
+|fee_status_id       |integer   |null,false                   |
+|prefecture_id       |integer   |null,false                   |
+|schedule_delivery_id|integer   |null,false                   |
+|price               |integer   |null,false                   |
+|user                |references|null,false, foreign_key: true|
 ### Assosiation
-- has_one :Purchases
-- belongs_to :Users
+- has_one :Purchase
+- belongs_to :User
 ## Puchases
 |Column           |Type      |Option                       |
 |-----------------|----------|-----------------------------|
-|user_id          |references|null,false, foreign_key: true|
-|item_id          |references|null,false, foreign_key: true|
+|user             |references|null,false, foreign_key: true|
+|item             |references|null,false, foreign_key: true|
 ### Assosiation
-- belongs_to :Items
-- belongs_to :Users
-- has_one :Shippings
+- belongs_to :Item
+- belongs_to :User
+- has_one :Shipping
 ## Shippings
 |Column           |Type      |Option                       |
 |-----------------|----------|-----------------------------|
 |postal_coad      |string    |null,false                   |
-|prefecture       |integer   |null,false                   |
+|prefecture_id    |integer   |null,false                   |
 |city             |string    |null,false                   |
 |address          |string    |null,false                   |
 |building         |string    |                             |
 |phone_number     |string    |null,false                   |
-|purchase_id      |references|null,false, foreign_key: true|
+|purchase         |references|null,false, foreign_key: true|
 ### Assosiation
-- belongs_to :Purchases
+- belongs_to :Purchase
