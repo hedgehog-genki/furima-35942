@@ -13,7 +13,7 @@
 |birth_date        |date  |null,false              |
 ### Assosiation
 - has_many :Items
-- has_many :Shippings
+- has_many :Purchases
 ## Items
 |Column              |Type      |Option                       |
 |--------------------|----------|-----------------------------|
