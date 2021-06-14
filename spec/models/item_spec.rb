@@ -13,9 +13,9 @@ RSpec.describe Item, type: :model do
     end
     context "商品の投稿ができない場合" do
       it "画像がないと投稿できない" do
-        @item.image = nil
+        @item.images = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include("Images can't be blank")
       end
       it "商品名がないと投稿できない" do
         @item.name = ""
@@ -42,20 +42,40 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category is not a number")
       end
+      it "category_idが1だと投稿できない" do
+        @item.category_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
       it "商品の状態が選択されてないと投稿できない" do
         @item.status_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Status is not a number")
+      end
+      it "status_idが1だと投稿できない" do
+        @item.status_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
       it "配送料が選択されてないと投稿できない" do
         @item.schedule_delivery_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Schedule delivery is not a number")
       end
+      it "schedule_delivery_idが1だと登録できない" do
+        @item.schedule_delivery_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Schedule delivery must be other than 1")
+      end
       it "発送の地域が選択されてないと投稿できない" do
         @item.prefecture_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture is not a number")
+      end
+      it "prefecture_idが1だと登録できない" do
+        @item.prefecture_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
       it "販売価格が空だと投稿できない" do
         @item.price = ""
@@ -68,14 +88,24 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it "販売価格が299円だと投稿できない" do
-        @item.price = "299"
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than 299")
       end
       it "販売価格が1000万円だと投稿できない" do
-        @item.price = "10000000"
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than 10000000")
+      end
+      it "priceが英数混合だと登録できない" do
+        @item.price = "abc123"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it "priceは英文字だけでは登録できない" do
+        @item.price = "aaaaaaa"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it "ユーザーが紐付いていないと投稿できない" do
         @item.user = nil
