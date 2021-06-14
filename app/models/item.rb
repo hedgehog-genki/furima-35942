@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_one_attached :image
+  has_one_attached :images
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :status
@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   validates :name, presence: true,length: { maximum: 40 }
   validates :info, presence: true,length: { maximum: 1000 }
   validates :price, presence: true
-  validates :image, presence: true
+  validates :images, presence: true
   validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 }
   validates :price, format: { with: /\A[0-9]+\z/, message: '半角数字で入力して下さい' }
 end
