@@ -8,8 +8,8 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :schedule
   validates :category_id, :status_id, :fee_status_id, :prefecture_id, :schedule_delivery_id, numericality: { other_than: 1 }
-  validates :name, presence: true,length: { maximum: 40 }
-  validates :info, presence: true,length: { maximum: 1000 }
+  validates :name, presence: true
+  validates :info, presence: true
   validates :price, presence: true
   validates :images, presence: true
   validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 }
