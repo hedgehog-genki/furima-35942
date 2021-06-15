@@ -13,9 +13,9 @@ RSpec.describe Item, type: :model do
     end
     context "商品の投稿ができない場合" do
       it "画像がないと投稿できない" do
-        @item.images = nil
+        @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Images can't be blank")
+        expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it "商品名がないと投稿できない" do
         @item.name = ""
@@ -47,7 +47,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
-      it "配送料が選択されてないと投稿できない" do
+      it "配送日が選択されてないと投稿できない" do
         @item.schedule_delivery_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Schedule delivery is not a number")
@@ -56,6 +56,16 @@ RSpec.describe Item, type: :model do
         @item.schedule_delivery_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Schedule delivery must be other than 1")
+      end
+      it "配送料の負担が選択されてないと投稿できない" do
+        @item.fee_status_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Fee status is not a number")
+      end
+      it "fee_statsu_idが1だと登録できない" do
+        @item.fee_status_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Fee status must be other than 1")
       end
       it "発送の地域が選択されてないと投稿できない" do
         @item.prefecture_id = ""
