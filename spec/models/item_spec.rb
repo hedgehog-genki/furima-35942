@@ -33,7 +33,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Category is not a number")
       end
       it "category_idが1だと投稿できない" do
-        @item.category_id = "1"
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
@@ -43,7 +43,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Status is not a number")
       end
       it "status_idが1だと投稿できない" do
-        @item.status_id = "1"
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
@@ -53,7 +53,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Schedule delivery is not a number")
       end
       it "schedule_delivery_idが1だと登録できない" do
-        @item.schedule_delivery_id = "1"
+        @item.schedule_delivery_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Schedule delivery must be other than 1")
       end
@@ -63,7 +63,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Prefecture is not a number")
       end
       it "prefecture_idが1だと登録できない" do
-        @item.prefecture_id = "1"
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
