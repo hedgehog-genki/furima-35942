@@ -11,6 +11,12 @@ class ItemsController < ApplicationController
     @items = Item.all.order("created_at DESC")
   end
 
+  def edit
+  end
+
+  def show
+  end
+
   def update
     @item.update(item_params)
     if @item.save
