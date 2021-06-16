@@ -20,12 +20,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def move_to_index
-    if @item.user_id != current_user.id
-      redirect_to action: :index
-    end
-  end
-
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -44,5 +38,11 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :info, :category_id, :status_id, :fee_status_id, :prefecture_id, :schedule_delivery_id,
                                  :price, :image).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    if @item.user_id != current_user.id
+      redirect_to action: :index
+    end
   end
 end
