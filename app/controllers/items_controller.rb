@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
   before_action :soldout, only: [:show]
+  before_action :user_soldout, only: [:edit]
 
   def new
     @item = Item.new
@@ -60,6 +61,12 @@ class ItemsController < ApplicationController
 
   def soldout
     if @item.user_id != current_user.id && @item.purchase.present?
+      redirect_to action: :index
+    end
+  end
+
+  def user_soldout
+    if @item.user_id == current_user.id && @item.purchase.present?
       redirect_to action: :index
     end
   end
