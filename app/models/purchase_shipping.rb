@@ -5,7 +5,7 @@ class PurchaseShipping
     validates :user_id
     validates :item_id
     validates :postal_coad, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
-    validates :phone_number, format: { with: /\A\d{11}\z/, message: "PhoneNumber must be 11 digit Half-width numbers" }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "PhoneNumber must be 10or11 digit Half-width numbers" }
     validates :city
     validates :address
     validates :token

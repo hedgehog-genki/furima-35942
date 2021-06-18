@@ -52,22 +52,22 @@ RSpec.describe PurchaseShipping, type: :model do
       it '電話番号が空欄だと購入できない' do
         @purchase_shipping.phone_number = ""
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Phone number can't be blank", "Phone number PhoneNumber must be 11 digit Half-width numbers")
+        expect(@purchase_shipping.errors.full_messages).to include("Phone number can't be blank", "Phone number PhoneNumber must be 10or11 digit Half-width numbers")
       end
       it '電話番号が12桁だと購入できない' do
         @purchase_shipping.phone_number = "090123456789"
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Phone number PhoneNumber must be 11 digit Half-width numbers")
+        expect(@purchase_shipping.errors.full_messages).to include("Phone number PhoneNumber must be 10or11 digit Half-width numbers")
       end
-      it '電話番号が10桁だと購入できない' do
-        @purchase_shipping.phone_number = "0901234567"
+      it '電話番号が9桁だと購入できない' do
+        @purchase_shipping.phone_number = "090123456"
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Phone number PhoneNumber must be 11 digit Half-width numbers")
+        expect(@purchase_shipping.errors.full_messages).to include("Phone number PhoneNumber must be 10or11 digit Half-width numbers")
       end
       it '電話番号が全角だと購入できない' do
         @purchase_shipping.phone_number = "０９０１２３４５６７８"
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Phone number PhoneNumber must be 11 digit Half-width numbers")
+        expect(@purchase_shipping.errors.full_messages).to include("Phone number PhoneNumber must be 10or11 digit Half-width numbers")
       end
       it 'tokenが空だと購入できない' do
         @purchase_shipping.token = ""
